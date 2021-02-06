@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ColoredLive.Core\ColoredLive.Core.csproj" />
+    <ProjectReference Include="..\ColoredLive.DAL\ColoredLive.DAL.csproj" />
+  </ItemGroup>
+
+</Project>
