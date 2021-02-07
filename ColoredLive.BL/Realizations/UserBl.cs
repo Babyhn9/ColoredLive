@@ -26,5 +26,8 @@ namespace ColoredLive.BL.Realizations
 
         public UserEntity Register(UserEntity newUser) =>
             _users.Find(el => el.Login == newUser.Login || el.Email == newUser.Email).Id != Guid.Empty ? new UserEntity() : _users.Add(newUser);
+
+        public UserEntity GetUser(Guid userId) => _users.Find(userId);
+       
     }
 }

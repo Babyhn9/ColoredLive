@@ -11,5 +11,6 @@ namespace ColoredLive.BL.Interfaces
         UserEntity Authorize(string login, string password);
         UserSettingEntity GetUserSettings(Guid userId);
         UserSettingEntity GetUserSettings(UserEntity user);
+        UserEntity GetUser(Guid userId);
     }
 }

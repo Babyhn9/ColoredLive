@@ -1,6 +1,9 @@
 ﻿using ColoredLive.BL.Interfaces;
 using ColoredLive.Core.Entities;
+using ColoredLive.DAL;
+using ColoredLive.MainService.Attributes;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,43 +12,54 @@ using System.Threading.Tasks;
 
 namespace ColoredLive.MainService.Controllers
 {
-    [Route("[controller]")]
-    public class AuthController : ControllerBase
+    public class AuthController : ProjectControllerBase
     {
+        private readonly IRepository<UserEntity> _users;
         private readonly IUserBl _userBl;
         private readonly IRecommendationBl _recommendationBl;
         private readonly ITokenCreationBl _tokenBl;
 
-        public AuthController(IUserBl userBl, IRecommendationBl recommendationBl, ITokenCreationBl tokenBl)
+        public AuthController(
+            IHttpContextAccessor acsessor,
+            IUserBl userBl, IRecommendationBl recommendationBl, 
+            ITokenCreationBl tokenBl, 
+            IRepository<UserEntity> users) : base(acsessor)
         {
-           _userBl = userBl;
-           _recommendationBl = recommendationBl;
-           _tokenBl = tokenBl;
+            _users = users;
+            _userBl = userBl;
+            _recommendationBl = recommendationBl;
+            _tokenBl = tokenBl;
         }
 
-        
-
         [HttpGet("authorize")]
-        [AllowAnonymous]
         public ActionResult<string> GetUserInfo(string login, string password)
         {
-            var findedUser = _userBl.Authorize(login,password);
-            _recommendationBl.GetTopRecomendations();
-            if (findedUser == null) return "";
-            
+            var findedUser = _userBl.Authorize(login, password);
+
+            if (findedUser.Id == Guid.Empty)
+                return "";
+
+
             return _tokenBl.Generate(findedUser);
         }
 
 
         [HttpPost("reg")]
-        [AllowAnonymous]
         public ActionResult<string> RegisterUser(UserEntity entity)
         {
-            var findedUser = _userBl.Register(entity);
+            var newUser = _userBl.Register(entity);
+            
+            if (newUser.Id == Guid.Empty)
+                return "";
+            
+            return _tokenBl.Generate(newUser);
+        }
 
-            if (findedUser == null) return "";
-
-            return _tokenBl.Generate(findedUser);
+        [JwtAuth]
+        [HttpGet]
+        public ActionResult<IEnumerable<UserEntity>> GetAllUsers()
+        {
+            return _users.FindAll(el => true);
         }
 
     }

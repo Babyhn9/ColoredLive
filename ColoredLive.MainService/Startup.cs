@@ -16,6 +16,8 @@ using Microsoft.EntityFrameworkCore;
 using ColoredLive.BL.Realizations;
 using ColoredLive.BL.Interfaces;
 using ColoredLive.MainService.Utils;
+using ColoredLive.MainService.Midlewares;
+using ColoredLive.Core.Models;
 
 namespace ColoredLive.MainService
 {
@@ -33,8 +35,10 @@ namespace ColoredLive.MainService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddHttpContextAccessor();
             services.AddSwaggerGen();
             BlAutoImplementor.Implement(services);
         }
@@ -53,13 +57,15 @@ namespace ColoredLive.MainService
 
             }
 
+            
+            app.UseCors(x=> 
+            x.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+            
             app.UseHttpsRedirection();
-
-
             app.UseRouting();
-
-            app.UseAuthorization();
-
+            app.UseMiddleware<JwtMiddleware>();            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
