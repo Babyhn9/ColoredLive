@@ -18,7 +18,12 @@ namespace ColoredLive.MainService.Utils
 
             foreach (var blType in assemblyTypes)
             {
-                serviceProvider.AddScoped(blType.GetInterfaces().First() ?? throw new NotImplementedException(), blType);
+                //new multi interface implementation
+                foreach (var @interface in blType.GetInterfaces() )
+                {
+                    serviceProvider.AddScoped(@interface, blType);
+                }
+                //old single interface implementation: serviceProvider.AddScoped(blType.GetInterfaces().First() ?? throw new NotImplementedException(), blType);
             }
 
 

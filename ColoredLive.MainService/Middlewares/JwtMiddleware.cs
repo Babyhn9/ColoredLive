@@ -1,17 +1,15 @@
-﻿using ColoredLive.BL.Interfaces;
-using ColoredLive.Core.Models;
-using ColoredLive.MainService.Utils;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ColoredLive.BL.Interfaces;
+using ColoredLive.Core.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
-namespace ColoredLive.MainService.Midlewares
+namespace ColoredLive.MainService.Middlewares
 {
     public class JwtMiddleware
     {
@@ -29,14 +27,13 @@ namespace ColoredLive.MainService.Midlewares
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             if (token != null)
             {
-                attachUserToContext(context, userBl, token);
-
+                AttachUserToContext(context, userBl, token);
             }
 
             await _next(context);
         }
 
-        private void attachUserToContext(HttpContext context, IUserBl userBl, string token)
+        private void AttachUserToContext(HttpContext context, IUserBl userBl, string token)
         {
             try
             {

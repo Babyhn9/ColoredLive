@@ -16,8 +16,8 @@ using Microsoft.EntityFrameworkCore;
 using ColoredLive.BL.Realizations;
 using ColoredLive.BL.Interfaces;
 using ColoredLive.MainService.Utils;
-using ColoredLive.MainService.Midlewares;
 using ColoredLive.Core.Models;
+using ColoredLive.MainService.Middlewares;
 
 namespace ColoredLive.MainService
 {

@@ -5,16 +5,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ColoredLive.DAL;
+using ColoredLive.MainService.Attributes;
+using ColoredLive.MainService.Utils;
 
 namespace ColoredLive.MainService.Controllers
 {
     [Route("[controller]")]
-    public class ProjectControllerBase : ControllerBase
+    [LazyUserIdentity]
+    public class ProjectControllerBase : ControllerBase, IAuthorizationController
     {
-        protected UserEntity Identity { get; set; }
-        public ProjectControllerBase(IHttpContextAccessor acsessor)
-        {
-            Identity = (UserEntity) acsessor.HttpContext.Items["User"];
-        }
+        public UserEntity Identity { get; set; }
+       
     }
 }

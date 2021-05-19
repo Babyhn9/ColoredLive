@@ -1,10 +1,7 @@
-using System;
-
-namespace ColoredLive.Core.Entities
+namespace ColoredLive.Core.Requests
 {
-    public class UserEntity : IEntity
+    public class RegisterRequest
     {
-        public Guid Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
