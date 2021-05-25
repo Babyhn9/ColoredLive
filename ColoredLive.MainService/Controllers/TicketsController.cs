@@ -7,10 +7,10 @@ namespace ColoredLive.MainService.Controllers
     public class TicketsController : ProjectControllerBase
     {
         [HttpGet("buy")]
-        public BaseResponse BuyTicketOn(BuyTicketRequest request)
+        public ActionResult BuyTicketOn(BuyTicketRequest request)
         {
-            
-            return BaseResponse.Ok();
+
+            return Ok();
         }
         
     }

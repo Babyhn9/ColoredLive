@@ -35,15 +35,14 @@ namespace ColoredLive.MainService.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpGet("me")]
-        public BaseResponse GetUserInfo(AuthRequest request)
+        public ActionResult<string> GetUserInfo(AuthRequest request)
         {
             var findedUser = _userBl.Authorize(request.Login, request.Password);
 
             if (findedUser.Id == Guid.Empty)
-                return BaseResponse.Error(StatusCodes.Status400BadRequest, "Пользователь с такими данными не обнаружен");
+                return StatusCode(StatusCodes.Status400BadRequest);
 
-
-            return BaseResponse.Ok(new AuthResponse(_tokenBl.Generate(findedUser)));
+            return _tokenBl.Generate(findedUser);
         }
 
         /// <summary>
