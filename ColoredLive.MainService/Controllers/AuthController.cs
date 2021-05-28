@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using ColoredLive.Core.Models;
+using ColoredLive.Core.Utils;
 
 
 namespace ColoredLive.MainService.Controllers
@@ -34,16 +36,20 @@ namespace ColoredLive.MainService.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpGet("me")]
-        public ActionResult<string> GetUserInfo(AuthRequest request)
+        [HttpGet("log")]
+        public ActionResult<string> Login(AuthRequest request)
         {
             var findedUser = _userBl.Authorize(request.Login, request.Password);
 
-            if (findedUser.Id == Guid.Empty)
+            if (findedUser.Id.Empty())
                 return StatusCode(StatusCodes.Status400BadRequest);
 
             return _tokenBl.Generate(findedUser);
         }
+        [HttpGet("info")]
+        [JwtAuth]
+        [RequireRole(Roles.EventChecker)]
+        public ActionResult<UserEntity> GetInfo() => Identity.User;
 
         /// <summary>
         /// Регестрирует пользователя в системе, возвращает токен пользователя
@@ -55,7 +61,7 @@ namespace ColoredLive.MainService.Controllers
         {
             var newUser = _userBl.Register(new UserEntity { Email = request.Email, Login = request.Login, Password = request.Password });
             
-            if (newUser.Id == Guid.Empty)
+            if (newUser.Id.Empty())
                 return "";
             
             return _tokenBl.Generate(newUser);

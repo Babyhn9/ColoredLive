@@ -25,9 +25,6 @@ namespace ColoredLive.MainService.Utils
                 }
                 //old single interface implementation: serviceProvider.AddScoped(blType.GetInterfaces().First() ?? throw new NotImplementedException(), blType);
             }
-
-
         }
-
     }
 }

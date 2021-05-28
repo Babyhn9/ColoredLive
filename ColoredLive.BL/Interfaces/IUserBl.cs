@@ -10,5 +10,10 @@ namespace ColoredLive.BL.Interfaces
         UserEntity Register(UserEntity newUser);
         UserEntity Authorize(string login, string password);
         UserEntity GetUser(Guid userId);
+
+        
+        IEnumerable<RoleEntity> GetUserRoles(Guid userId);
+        bool SetRole(Guid userId, Guid roleId);
+        
     }
 }

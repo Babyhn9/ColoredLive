@@ -6,6 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ColoredLive.BL.Interfaces;
+using ColoredLive.BL.Realizations;
+using ColoredLive.Core.Entities;
+using ColoredLive.DAL;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ColoredLive.MainService
 {
@@ -13,7 +18,12 @@ namespace ColoredLive.MainService
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+
+            using (var scope = host.Services.CreateScope())
+                scope.ServiceProvider.GetService<IStartupInvocationBl>().Startup();
+           
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

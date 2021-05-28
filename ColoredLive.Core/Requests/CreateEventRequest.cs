@@ -18,6 +18,6 @@ namespace ColoredLive.Core.Requests
         /// <summary>
         /// Дата Проведения события
         /// </summary>
-        public DateTime PlayTime { get; set; }
+        public DateTime StartTime { get; set; }
     }
 }

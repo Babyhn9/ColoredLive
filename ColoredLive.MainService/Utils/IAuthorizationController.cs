@@ -1,9 +1,10 @@
 using ColoredLive.Core.Entities;
+using ColoredLive.Core.Models;
 
 namespace ColoredLive.MainService.Utils
 {
     public interface IAuthorizationController
     {
-        UserEntity Identity { get; set; }
+        Identity Identity { get; set; }
     }
 }

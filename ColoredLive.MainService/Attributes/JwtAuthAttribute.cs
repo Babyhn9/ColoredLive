@@ -7,8 +7,11 @@ using System;
 namespace ColoredLive.MainService.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class JwtAuthAttribute : Attribute, IAuthorizationFilter
+    public class JwtAuthAttribute : Attribute, IAuthorizationFilter, IOrderedFilter
     {
+        
+        public int Order { get; } = 1;
+
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             var user = (UserEntity)context.HttpContext.Items["User"];
@@ -16,5 +19,6 @@ namespace ColoredLive.MainService.Attributes
             if(user == null)
                 context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
         }
+
     }
 }

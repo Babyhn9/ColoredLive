@@ -13,13 +13,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ColoredLive.MainService.Controllers
 {
+    [JwtAuth]
     public class EventController : ProjectControllerBase
     {
        private readonly IEventBl _eventBl;
        private readonly ITagBl _tagBl;
        private readonly IRepository<EventEntity> _events;
 
-       public EventController( IEventBl eventBl, ITagBl tagBl, IRepository<EventEntity> events)
+       public EventController(IEventBl eventBl, ITagBl tagBl, IRepository<EventEntity> events)
        {
            _eventBl = eventBl;
            _tagBl = tagBl;
@@ -34,22 +35,23 @@ namespace ColoredLive.MainService.Controllers
         [HttpPost("create")]
         public ActionResult AddNewEvent(CreateEventRequest request)
         {
-            if (_eventBl.CanCreateEvent(Identity.Id))
+            if (_eventBl.CanCreateEvent(Identity.User.Id))
             {
                 var newEvent = new EventEntity
                 {
                     EndSellingDate =  request.EndSellingDate,
-                    PlayTime = request.PlayTime,
+                    PlayTime = request.StartTime,
                     StartSellingDate = request.StartSellingDate,
                     Name = request.Name,
                     Description = request.Description
                 };
-                var createdEvent =  _eventBl.CreateEvent(Identity.Id, newEvent);
+                var createdEvent =  _eventBl.CreateEvent(Identity.User.Id, newEvent);
                 return createdEvent.Id != Guid.Empty ? Ok() : StatusCode(StatusCodes.Status500InternalServerError);
             }
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
+        [HttpGet("tags/set")]
         public ActionResult SetTags(SetTagsRequest request)
         {
 
@@ -69,7 +71,7 @@ namespace ColoredLive.MainService.Controllers
         /// <returns></returns>
         [HttpGet("sub")]
         public ActionResult Subscribe(SubscribeRequest request) =>
-            _eventBl.Subscribe(request.EventId, Identity.Id) ? (ActionResult) Ok(): BadRequest();
+            _eventBl.Subscribe(request.EventId, Identity.User.Id) ? (ActionResult) Ok(): BadRequest();
 
         /// <summary>
         /// Возвращает список ивентов, используя пагинацию
@@ -79,7 +81,7 @@ namespace ColoredLive.MainService.Controllers
         [HttpGet("get")]
         public ActionResult<IEnumerable<EventEntity>> GetEvents(GetEventsRequest request)
         {
-            return Ok(_eventBl.GetActualEvents(request.PageSize, request.CurrentSize));
+            return Ok(_eventBl.GetActualEvents(request.PageSize, request.CurrentPage));
         }
 
         /// <summary>
@@ -89,7 +91,7 @@ namespace ColoredLive.MainService.Controllers
         [HttpGet("get/my")]
         public ActionResult<IEnumerable<EventEntity>> GetFavoriteEvents()
         {
-           return  Ok(_eventBl.GetFavoriteUserEvents(Identity.Id));
+           return  Ok(_eventBl.GetFavoriteUserEvents(Identity.User.Id));
         }
 
 #if !RELEASE

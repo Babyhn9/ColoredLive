@@ -3,8 +3,11 @@ using ColoredLive.Core.Entities;
 using ColoredLive.DAL;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using ColoredLive.Core.RefEntities;
+using ColoredLive.Core.Utils;
 
 namespace ColoredLive.BL.Realizations
 {
@@ -12,37 +15,64 @@ namespace ColoredLive.BL.Realizations
     public class UserBl : IUserBl
     {
         private IRepository<UserEntity> _users;
+        private readonly IRepository<UserRoleRef> _userRoles;
+        private readonly IRepository<RoleEntity> _roles;
 
-        public UserBl(IRepository<UserEntity> users)
+        public UserBl(IRepository<UserEntity> users, IRepository<UserRoleRef> userRoles, IRepository<RoleEntity> roles)
         {
             _users = users;
+            _userRoles = userRoles;
+            _roles = roles;
         }
         public UserEntity Authorize(string login, string password)
         {
-            var founded = _users.Find(el => el.Login == login);
-            if (founded.Id == Guid.Empty)
-                return founded;
+            try
+            {
+                var founded = _users.Find(el => el.Login == login);
+                if (founded.Id == Guid.Empty)
+                    return founded;
 
-            if (VerifyHashedPassword(founded.Password, password))
-                return founded;
-            else
+                if (founded.Password == password)
+                    return founded;
+                
                 return new UserEntity();
+            }
+            catch (Exception ex)
+            {
+                return new UserEntity();
+            }
         }
      
         public UserEntity Register(UserEntity newUser)
         {
-            var founded = _users.Find(el => el.Login == newUser.Login || el.Email == newUser.Email);
+            var founded = _users.Find(el => el.Login == newUser.Login);
             
-            if (founded.Id != Guid.Empty)
+            if (!founded.Id.Empty())
                 return founded;
-
-            newUser.Password = HashPassword(newUser.Password);
             
             return _users.Add(newUser);
 
         }
         public UserEntity GetUser(Guid userId) => _users.Find(userId);
+        public IEnumerable<RoleEntity> GetUserRoles(Guid userId)
+        {
+            return _userRoles
+                .FindAll(el => el.UserId == userId)
+                .Select(el => _roles.Find(el.RoleId));
+        }
 
+        public bool SetRole(Guid userId, Guid roleId)
+        {
+            var role = _roles.Find(roleId);
+            if (role.Id.Empty()) return false; // если роли с таким id нет
+            
+            var attachedRole = _userRoles.Find(el => el.RoleId == roleId && el.UserId == userId);
+            if (!attachedRole.Id.Empty()) return false; // если роль уже назначенна
+
+            _userRoles.Add(new UserRoleRef {UserId = userId, RoleId = roleId});
+            
+            return true;
+        }
 
         private string HashPassword(string password)
         {

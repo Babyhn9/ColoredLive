@@ -34,13 +34,19 @@ namespace ColoredLive.MainService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            var byConnectionSection = Configuration.GetSection("ConnectionStrings:DBConnection");
+            Console.WriteLine($"connection:{byConnectionSection}");
+                        
+
             services.AddControllers();
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(byConnectionSection.Value));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddHttpContextAccessor();
             services.AddSwaggerGen();
             BlAutoImplementor.Implement(services);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +68,8 @@ namespace ColoredLive.MainService
             x.AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader());
-            
+
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseMiddleware<JwtMiddleware>();            

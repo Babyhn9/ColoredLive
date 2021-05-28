@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ColoredLive.Core.Models;
 using ColoredLive.DAL;
 using ColoredLive.MainService.Attributes;
 using ColoredLive.MainService.Utils;
@@ -15,7 +16,7 @@ namespace ColoredLive.MainService.Controllers
     [LazyUserIdentity]
     public class ProjectControllerBase : ControllerBase, IAuthorizationController
     {
-        public UserEntity Identity { get; set; }
+        public Identity Identity { get; set; }
        
     }
 }
