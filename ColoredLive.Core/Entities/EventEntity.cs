@@ -2,9 +2,8 @@ using System;
 
 namespace ColoredLive.Core.Entities
 {
-    public class EventEntity : IEntity
+    public class EventEntity : Entity
     {
-        public Guid Id { get; set; }
         public Guid OwnerUserId { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }

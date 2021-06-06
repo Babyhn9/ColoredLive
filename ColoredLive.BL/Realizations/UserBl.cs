@@ -74,6 +74,18 @@ namespace ColoredLive.BL.Realizations
             return true;
         }
 
+        public bool SetRole(Guid userId, string role)
+        {
+            var foundedRole = _roles.Find(el => el.Role == role);
+            if (foundedRole.Id.Empty()) return false; // если роли с таким id нет
+            
+            var attachedRole = _userRoles.Find(el => el.RoleId == foundedRole.Id && el.UserId == userId);
+            if (!attachedRole.Id.Empty()) return false; // если роль уже назначенна
+
+            _userRoles.Add(new UserRoleRef {UserId = userId, RoleId = foundedRole.Id});
+            return true;
+        }
+
         private string HashPassword(string password)
         {
             byte[] salt;

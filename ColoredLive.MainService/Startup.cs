@@ -34,14 +34,10 @@ namespace ColoredLive.MainService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            var byConnectionSection = Configuration.GetSection("ConnectionStrings:DBConnection");
-            Console.WriteLine($"connection:{byConnectionSection}");
-                        
-
+            //Configuration.GetSection("ConnectionStrings:DBConnection").Value)
             services.AddControllers();
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(byConnectionSection.Value));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=Application.db;"));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddHttpContextAccessor();
             services.AddSwaggerGen();
@@ -52,8 +48,8 @@ namespace ColoredLive.MainService
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
+           // if (env.IsDevelopment())
+            //{
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger(c => c.SerializeAsV2 = true);
                 app.UseSwaggerUI(c =>
@@ -61,7 +57,7 @@ namespace ColoredLive.MainService
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 });
 
-            }
+            //}
 
             
             app.UseCors(x=> 

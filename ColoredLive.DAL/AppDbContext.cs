@@ -24,5 +24,7 @@ namespace ColoredLive.DAL
         {
             Database.EnsureCreated();
         }
+
+        
     }
 }

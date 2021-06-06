@@ -1,10 +1,10 @@
 using System;
+using ColoredLive.Core.Utils;
 
 namespace ColoredLive.Core.RefEntities
 {
-    public class EventTagRef : IEntity
+    public class EventTagRef : Entity
     {
-        public Guid Id { get; set; }
         public Guid EventId { get; set; }
         public Guid TagId { get; set; }
     }

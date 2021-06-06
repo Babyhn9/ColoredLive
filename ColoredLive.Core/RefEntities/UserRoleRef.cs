@@ -2,9 +2,8 @@ using System;
 
 namespace ColoredLive.Core.RefEntities
 {
-    public class UserRoleRef : IEntity
+    public class UserRoleRef : Entity
     {
-        public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public Guid RoleId { get; set; }
     }

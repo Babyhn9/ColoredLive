@@ -48,9 +48,8 @@ namespace ColoredLive.MainService.Controllers
         }
         [HttpGet("info")]
         [JwtAuth]
-        [RequireRole(Roles.EventChecker)]
-        public ActionResult<UserEntity> GetInfo() => Identity.User;
-
+        public ActionResult<Identity> GetInfo() => Identity;
+        
         /// <summary>
         /// Регестрирует пользователя в системе, возвращает токен пользователя
         /// </summary>

@@ -14,6 +14,8 @@ namespace ColoredLive.BL.Interfaces
         
         IEnumerable<RoleEntity> GetUserRoles(Guid userId);
         bool SetRole(Guid userId, Guid roleId);
+        bool SetRole(Guid userId, string role);
+
         
     }
 }

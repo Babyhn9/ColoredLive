@@ -50,7 +50,7 @@ namespace ColoredLive.DAL
 
         public T Find(Guid id)
         {
-            var result =_store.FirstOrDefault(el => (el as IEntity).Id == id) ?? new T();
+            var result =_store.FirstOrDefault(el => (el as Entity).Id == id) ?? new T();
             return result;
         }
 

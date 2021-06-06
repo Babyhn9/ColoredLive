@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ColoredLive.BL.Interfaces;
 using ColoredLive.Core.Entities;
+using ColoredLive.Core.Models;
 using ColoredLive.Core.Requests;
 using ColoredLive.Core.Responses;
 using ColoredLive.DAL;
@@ -93,6 +94,13 @@ namespace ColoredLive.MainService.Controllers
         {
            return  Ok(_eventBl.GetFavoriteUserEvents(Identity.User.Id));
         }
+        [HttpGet("get/own")]
+        [RequireRole(Roles.EventOwner)]
+        public ActionResult<IEnumerable<EventEntity>> GetCreatedEvents()
+        {
+            return  Ok(_eventBl.GetCreatedEvents(Identity.User.Id));
+        }
+
 
 #if !RELEASE
         [HttpGet("get/all")]
