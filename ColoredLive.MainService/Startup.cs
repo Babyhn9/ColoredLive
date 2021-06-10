@@ -1,23 +1,12 @@
-using ColoredLive.Core.Entities;
 using ColoredLive.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using ColoredLive.BL.Realizations;
-using ColoredLive.BL.Interfaces;
-using ColoredLive.MainService.Utils;
 using ColoredLive.Core.Models;
-using ColoredLive.MainService.Middlewares;
+using ColoredLive.Service.Core.Utils;
+using ColoredLive.Service.Core.Middlewares;
 
 namespace ColoredLive.MainService
 {

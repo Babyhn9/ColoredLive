@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColoredLive.DAL", "ColoredL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColoredLive.BL", "ColoredLive.BL\ColoredLive.BL.csproj", "{F1377871-C37E-4960-AD5B-960F79D6D525}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColoredLive.Service.Core", "ColoredLive.Service.Core\ColoredLive.Service.Core.csproj", "{0936447A-DD5D-4EA7-BA1F-EFD0568B7952}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F1377871-C37E-4960-AD5B-960F79D6D525}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1377871-C37E-4960-AD5B-960F79D6D525}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1377871-C37E-4960-AD5B-960F79D6D525}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0936447A-DD5D-4EA7-BA1F-EFD0568B7952}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0936447A-DD5D-4EA7-BA1F-EFD0568B7952}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0936447A-DD5D-4EA7-BA1F-EFD0568B7952}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0936447A-DD5D-4EA7-BA1F-EFD0568B7952}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

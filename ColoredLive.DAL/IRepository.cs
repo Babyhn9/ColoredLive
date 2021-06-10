@@ -16,5 +16,7 @@ namespace ColoredLive.DAL
         bool Remove(T entity);
         bool Remove(Guid entity);
 
+        int Count();
+
     }
 }

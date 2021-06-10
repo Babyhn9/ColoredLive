@@ -7,7 +7,7 @@ namespace ColoredLive.Core
     {
         Guid Id { get; }
         [JsonIgnore]
-        bool IsEmpty { get;  }
+        bool IsEmpty { get; }
         
     }
 }

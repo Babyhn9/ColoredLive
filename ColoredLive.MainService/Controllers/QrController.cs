@@ -1,8 +1,5 @@
-using System.Drawing;
 using ColoredLive.BL.Interfaces;
 using ColoredLive.Core.Requests;
-using ColoredLive.Core.Responses;
-using ColoredLive.MainService.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ColoredLive.MainService.Controllers

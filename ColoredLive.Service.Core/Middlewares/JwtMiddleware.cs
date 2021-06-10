@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace ColoredLive.MainService.Middlewares
+namespace ColoredLive.Service.Core.Middlewares
 {
     public class JwtMiddleware
     {

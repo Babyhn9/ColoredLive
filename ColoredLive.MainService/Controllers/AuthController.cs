@@ -1,15 +1,15 @@
-﻿using ColoredLive.BL.Interfaces;
+﻿using System;
+using System.Linq;
+using ColoredLive.BL.Interfaces;
 using ColoredLive.Core.Entities;
 using ColoredLive.Core.Requests;
-using ColoredLive.Core.Responses;
 using ColoredLive.DAL;
-using ColoredLive.MainService.Attributes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using ColoredLive.Core.Models;
 using ColoredLive.Core.Utils;
+using ColoredLive.Service.Core.Attributes;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace ColoredLive.MainService.Controllers
@@ -31,21 +31,17 @@ namespace ColoredLive.MainService.Controllers
             _tokenBl = tokenBl;
         } 
 
-        /// <summary>
-        /// возвращает токен пользователя по логину и паролю
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpGet("log")]
         public ActionResult<string> Login(AuthRequest request)
         {
             var findedUser = _userBl.Authorize(request.Login, request.Password);
 
-            if (findedUser.Id.Empty())
+            if (findedUser.IsEmpty)
                 return StatusCode(StatusCodes.Status400BadRequest);
 
-            return _tokenBl.Generate(findedUser);
+            return new JsonResult(new { Token = _tokenBl.Generate(findedUser)});
         }
+        
         [HttpGet("info")]
         [JwtAuth]
         public ActionResult<Identity> GetInfo() => Identity;
@@ -60,10 +56,10 @@ namespace ColoredLive.MainService.Controllers
         {
             var newUser = _userBl.Register(new UserEntity { Email = request.Email, Login = request.Login, Password = request.Password });
             
-            if (newUser.Id.Empty())
+            if (newUser.IsEmpty)
                 return "";
             
-            return _tokenBl.Generate(newUser);
+            return new JsonResult( new { Token = _tokenBl.Generate(newUser)});
         }
     }
 }

@@ -85,6 +85,8 @@ namespace ColoredLive.DAL
             _context.SaveChanges();
         }
 
+        public int Count() => _store.Count();
+
         private static DbSet<T> GetCurrentStore(AppDbContext context)
         {
             return (DbSet<T>) _storesInfo[typeof(T).Name].GetValue(context);

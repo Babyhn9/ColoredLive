@@ -4,7 +4,7 @@ using System.Linq;
 using ColoredLive.BL.Interfaces;
 using ColoredLive.Core.Entities;
 using ColoredLive.Core.Requests;
-using ColoredLive.MainService.Attributes;
+using ColoredLive.Service.Core.Attributes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

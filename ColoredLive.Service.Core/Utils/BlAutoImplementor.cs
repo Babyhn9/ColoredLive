@@ -6,9 +6,9 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace ColoredLive.MainService.Utils
+namespace ColoredLive.Service.Core.Utils
 {
-    internal static class BlAutoImplementor
+    public static class BlAutoImplementor
     {
         public static void Implement(IServiceCollection serviceProvider)
         {

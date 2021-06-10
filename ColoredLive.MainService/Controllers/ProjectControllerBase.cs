@@ -7,8 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using ColoredLive.Core.Models;
 using ColoredLive.DAL;
-using ColoredLive.MainService.Attributes;
-using ColoredLive.MainService.Utils;
+using ColoredLive.Service.Core.Attributes;
+using ColoredLive.Service.Core.Utils;
 
 namespace ColoredLive.MainService.Controllers
 {

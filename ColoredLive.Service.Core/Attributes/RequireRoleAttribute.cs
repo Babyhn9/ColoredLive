@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ColoredLive.MainService.Utils;
+using ColoredLive.Service.Core.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace ColoredLive.MainService.Attributes
+namespace ColoredLive.Service.Core.Attributes
 {
     public class RequireRoleAttribute : Attribute, IActionFilter, IOrderedFilter
     {

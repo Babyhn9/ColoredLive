@@ -92,5 +92,12 @@ namespace ColoredLive.BL.Realizations
                 .Select(el => _events.Find(el.EventId)) // конвертим id-Шки в полноценные модели
                 .Where(el => el.StartSellingDate.Ticks > actualDateTime.Ticks);
         }
+
+        public EventEntity GetLuckyEvent()
+        {
+            var totalCount = _events.Count();
+            var random = new Random().Next(0, totalCount);
+            return _events.FindAll(el => true)[random];
+        }
     }
 }

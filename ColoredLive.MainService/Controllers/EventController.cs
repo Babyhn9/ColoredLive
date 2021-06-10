@@ -5,10 +5,8 @@ using ColoredLive.BL.Interfaces;
 using ColoredLive.Core.Entities;
 using ColoredLive.Core.Models;
 using ColoredLive.Core.Requests;
-using ColoredLive.Core.Responses;
 using ColoredLive.DAL;
-using ColoredLive.MainService.Attributes;
-using Microsoft.AspNetCore.Authorization;
+using ColoredLive.Service.Core.Attributes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -101,13 +99,7 @@ namespace ColoredLive.MainService.Controllers
             return  Ok(_eventBl.GetCreatedEvents(Identity.User.Id));
         }
 
-
-#if !RELEASE
-        [HttpGet("get/all")]
-        public ActionResult<IEnumerable<EventEntity>> All()
-        {
-            return _events.FindAll(item => true);
-        }
-#endif
+        [HttpGet("luck")]
+        public ActionResult<EventEntity> GetRandomEvent() => _eventBl.GetLuckyEvent();
     }   
 }

@@ -1,11 +1,11 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+FROM  mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 
 COPY ["./ColoredLive.Core/ColoredLive.Core.csproj", "ColoredLive.Core/"]
@@ -19,6 +19,11 @@ COPY ["./ColoredLive.DAL", "ColoredLive.DAL/"]
 COPY ["./ColoredLive.BL/ColoredLive.BL.csproj", "ColoredLive.BL/"]
 RUN dotnet restore "ColoredLive.BL/ColoredLive.BL.csproj"
 COPY ["./ColoredLive.BL", "ColoredLive.BL/"]
+
+
+COPY ["./ColoredLive.Service.Core/ColoredLive.Service.Core.csproj", "ColoredLive.Service.Core/"]
+RUN dotnet restore "ColoredLive.Service.Core/ColoredLive.Service.Core.csproj"
+COPY ["./ColoredLive.Service.Core", "ColoredLive.Service.Core/"]
 
 COPY ["./ColoredLive.MainService/ColoredLive.MainService.csproj", "ColoredLive.MainService/"]
 RUN dotnet restore "./ColoredLive.MainService/ColoredLive.MainService.csproj"

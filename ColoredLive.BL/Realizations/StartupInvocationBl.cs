@@ -44,14 +44,14 @@ namespace ColoredLive.BL.Realizations
             {
                 var defaultUser = new UserEntity
                 {
-                    Login = "test",
-                    Password = "12345"
+                    Login = "justuser",
+                    Password = "123456789"
                 };
 
                 var userWhitOwns = new UserEntity
                 {
-                    Login = "test1",
-                    Password = "12345"
+                    Login = "eventowner",
+                    Password = "123456789"
                 };
 
                 defaultUser = _userBl.Register(defaultUser);

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 
-namespace ColoredLive.MainService.Attributes
+namespace ColoredLive.Service.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class JwtAuthAttribute : Attribute, IAuthorizationFilter, IOrderedFilter

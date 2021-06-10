@@ -32,5 +32,11 @@ namespace ColoredLive.BL.Interfaces
         /// <param name="tagId"></param>
         /// <returns></returns>
         IEnumerable<EventEntity> GetEventsByTag(Guid tagId);
+
+        /// <summary>
+        /// Возвращает случайное событие пользователю
+        /// </summary>
+        /// <returns></returns>
+        EventEntity GetLuckyEvent();
     }
 }

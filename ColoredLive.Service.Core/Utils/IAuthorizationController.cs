@@ -1,7 +1,7 @@
 using ColoredLive.Core.Entities;
 using ColoredLive.Core.Models;
 
-namespace ColoredLive.MainService.Utils
+namespace ColoredLive.Service.Core.Utils
 {
     public interface IAuthorizationController
     {

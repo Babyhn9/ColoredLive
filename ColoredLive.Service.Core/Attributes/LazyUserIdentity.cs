@@ -2,11 +2,11 @@ using System;
 using ColoredLive.BL.Interfaces;
 using ColoredLive.Core.Entities;
 using ColoredLive.Core.Models;
-using ColoredLive.MainService.Utils;
+using ColoredLive.Service.Core.Utils;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ColoredLive.MainService.Attributes
+namespace ColoredLive.Service.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class LazyUserIdentity : Attribute, IActionFilter 
