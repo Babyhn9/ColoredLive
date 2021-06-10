@@ -17,16 +17,14 @@ namespace ColoredLive.MainService.Controllers
     
     public class AuthController : ProjectControllerBase
     {
-        private readonly IRepository<UserEntity> _users;
         private readonly IUserBl _userBl;
         private readonly ITokenCreationBl _tokenBl;
 
         public AuthController(
             IUserBl userBl, 
-            ITokenCreationBl tokenBl, 
-            IRepository<UserEntity> users) 
+            ITokenCreationBl tokenBl
+            ) 
         {
-            _users = users;
             _userBl = userBl;
             _tokenBl = tokenBl;
         } 
