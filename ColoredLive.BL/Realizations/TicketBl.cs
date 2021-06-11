@@ -39,7 +39,7 @@ namespace ColoredLive.BL.Realizations
         public bool Enter(Guid ticketId, Guid userid)
         {
             var ticket = _tickets.Find(el => el.Owner == userid);
-            if (ticket.IsEnter || ticket.Id.Empty()) return false;
+            if (ticket.IsEnter || ticket.IsEmpty) return false;
            
             ticket.IsEnter = true;
             _tickets.Update(ticket);

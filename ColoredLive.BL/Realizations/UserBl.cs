@@ -47,7 +47,7 @@ namespace ColoredLive.BL.Realizations
         {
             var founded = _users.Find(el => el.Login == newUser.Login);
             
-            if (!founded.Id.Empty())
+            if (!founded.IsEmpty)
                 return founded;
             
             return _users.Add(newUser);
@@ -64,10 +64,10 @@ namespace ColoredLive.BL.Realizations
         public bool SetRole(Guid userId, Guid roleId)
         {
             var role = _roles.Find(roleId);
-            if (role.Id.Empty()) return false; // если роли с таким id нет
+            if (role.IsEmpty) return false; // если роли с таким id нет
             
             var attachedRole = _userRoles.Find(el => el.RoleId == roleId && el.UserId == userId);
-            if (!attachedRole.Id.Empty()) return false; // если роль уже назначенна
+            if (!attachedRole.IsEmpty) return false; // если роль уже назначенна
 
             _userRoles.Add(new UserRoleRef {UserId = userId, RoleId = roleId});
             
@@ -77,10 +77,10 @@ namespace ColoredLive.BL.Realizations
         public bool SetRole(Guid userId, string role)
         {
             var foundedRole = _roles.Find(el => el.Role == role);
-            if (foundedRole.Id.Empty()) return false; // если роли с таким id нет
+            if (foundedRole.IsEmpty) return false; // если роли с таким id нет
             
             var attachedRole = _userRoles.Find(el => el.RoleId == foundedRole.Id && el.UserId == userId);
-            if (!attachedRole.Id.Empty()) return false; // если роль уже назначенна
+            if (!attachedRole.IsEmpty) return false; // если роль уже назначенна
 
             _userRoles.Add(new UserRoleRef {UserId = userId, RoleId = foundedRole.Id});
             return true;

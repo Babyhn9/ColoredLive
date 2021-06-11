@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using ColoredLive.Service.Core.Utils;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +12,6 @@ namespace ColoredLive.Service.Core.Attributes
 
         public int Order { get; } = 2;
         
-
         private string _reqRole;
         public RequireRoleAttribute(string role)
         {
