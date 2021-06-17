@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using ColoredLive.BL.Interfaces;
 using ColoredLive.Core.Entities;
 using ColoredLive.Core.Models;
@@ -29,7 +30,7 @@ namespace ColoredLive.BL.Realizations
             _taggedEvents = taggedEvents;
             _userBl = userBl;
         }
-
+        
         public IEnumerable<EventEntity> GetActualEvents(int size, int current)
         {
             var actualDateTime = DateTime.Now.AddMinutes(30).Ticks;
@@ -37,6 +38,7 @@ namespace ColoredLive.BL.Realizations
                 .FindAll(el => el.StartSellingDate.Ticks > actualDateTime)
                 .Skip(size * (current-1))
                 .Take(size);
+            
         }
 
         public IEnumerable<EventEntity> GetFavoriteUserEvents(Guid userId)
@@ -53,11 +55,11 @@ namespace ColoredLive.BL.Realizations
 
         public bool Subscribe(Guid user, Guid @event)
         {
-            var isSubscribed = _subscribers
-                .Find(el => el.EventId == @event && el.UserId == user).Id == Guid.Empty;
+            var subscribeModel = _subscribers
+                .Find(el => el.EventId == @event && el.UserId == user);
 
 
-            if (isSubscribed)
+            if (!subscribeModel.IsEmpty)
                 return false;
             
             _subscribers.Add(new UserSubscribeRef {UserId = user, EventId = @event});
@@ -82,8 +84,7 @@ namespace ColoredLive.BL.Realizations
         {
             return true;
         }
-
-     
+        
         public IEnumerable<EventEntity> GetEventsByTag(Guid tagId)
         {
             var actualDateTime = DateTime.Now.AddMinutes(30);

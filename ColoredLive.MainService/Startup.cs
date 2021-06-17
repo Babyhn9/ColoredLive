@@ -1,3 +1,5 @@
+using ColoredLive.BL.Interfaces;
+using ColoredLive.BL.Realizations;
 using ColoredLive.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +32,7 @@ namespace ColoredLive.MainService
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddHttpContextAccessor();
             services.AddSwaggerGen();
-            BlAutoImplementor.Implement(services);
+            BlAutoImplementor.Implement<IUserBl>(services);
             
         }
 

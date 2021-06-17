@@ -4,6 +4,7 @@ using ColoredLive.BL.Interfaces;
 using ColoredLive.Core.Entities;
 using ColoredLive.Core.Requests;
 using ColoredLive.Core.Responses;
+using ColoredLive.Service.Core;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ColoredLive.MainService.Controllers
@@ -16,10 +17,20 @@ namespace ColoredLive.MainService.Controllers
         {
             _ticketBl = ticketBl;
         }
+        
         [HttpGet("buy")]
         public ActionResult BuyTicketOn(BuyTicketRequest request)
         {
             _ticketBl.BuyTicket(Identity.User.Id, request.EventId);
+            return Ok();
+        }
+
+        [HttpGet("buy/for")]
+        public ActionResult BuyTicketFor(BuyTicketForRequest request)
+        {
+            var ticket = _ticketBl.BuyTicket(request.FriendLogin, request.EventId);
+            if (ticket.IsEmpty)
+                return new BadRequestResult();
             return Ok();
         }
 
@@ -33,7 +44,7 @@ namespace ColoredLive.MainService.Controllers
         [HttpGet("enter")]
         public ActionResult<bool> Enter(EnterRequest request)
         {
-            return _ticketBl.Enter(request.TicketId, request.TicketId);
+            return _ticketBl.Enter(request.TicketId);
         }
         
     }

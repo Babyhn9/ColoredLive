@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColoredLive.BL", "ColoredLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColoredLive.Service.Core", "ColoredLive.Service.Core\ColoredLive.Service.Core.csproj", "{0936447A-DD5D-4EA7-BA1F-EFD0568B7952}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColoredLive.Service.Tickets", "ColoredLive.Service.Tickets\ColoredLive.Service.Tickets.csproj", "{72509543-578C-4F7E-9119-8B90D117E77C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{0936447A-DD5D-4EA7-BA1F-EFD0568B7952}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0936447A-DD5D-4EA7-BA1F-EFD0568B7952}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0936447A-DD5D-4EA7-BA1F-EFD0568B7952}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72509543-578C-4F7E-9119-8B90D117E77C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72509543-578C-4F7E-9119-8B90D117E77C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72509543-578C-4F7E-9119-8B90D117E77C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72509543-578C-4F7E-9119-8B90D117E77C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

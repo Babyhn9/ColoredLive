@@ -6,6 +6,7 @@ using ColoredLive.Core.Entities;
 using ColoredLive.Core.Models;
 using ColoredLive.Core.Requests;
 using ColoredLive.DAL;
+using ColoredLive.Service.Core;
 using ColoredLive.Service.Core.Attributes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

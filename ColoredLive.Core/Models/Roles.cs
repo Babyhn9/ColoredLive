@@ -11,7 +11,7 @@ namespace ColoredLive.Core.Models
         public static List<string> All { get; } = new List<string>
         {
             EventOwner,
-            EventChecker
+            EventChecker,
         };
     }
 }

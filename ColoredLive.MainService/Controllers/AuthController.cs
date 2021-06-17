@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ColoredLive.Core.Models;
 using ColoredLive.Core.Utils;
+using ColoredLive.Service.Core;
 using ColoredLive.Service.Core.Attributes;
 using Microsoft.EntityFrameworkCore;
 
