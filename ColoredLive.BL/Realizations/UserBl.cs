@@ -54,7 +54,7 @@ namespace ColoredLive.BL.Realizations
 
         }
         public UserEntity GetUser(Guid userId) => _users.Find(userId);
-        public IEnumerable<RoleEntity> GetUserRoles(Guid userId)
+        public IEnumerable<RoleEntity> GetRoles(Guid userId)
         {
             return _userRoles
                 .FindAll(el => el.UserId == userId)

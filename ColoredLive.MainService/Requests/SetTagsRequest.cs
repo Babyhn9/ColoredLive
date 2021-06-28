@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ColoredLive.Core.Requests
+namespace ColoredLive.MainService.Requests
 {
     public class SetTagsRequest
     {

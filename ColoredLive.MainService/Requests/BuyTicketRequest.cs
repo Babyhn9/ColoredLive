@@ -1,6 +1,6 @@
 using System;
 
-namespace ColoredLive.Core.Requests
+namespace ColoredLive.MainService.Requests
 {
     public class BuyTicketRequest 
     {

@@ -15,8 +15,9 @@ namespace ColoredLive.Service.Core.Attributes
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             var user = (UserEntity)context.HttpContext.Items["User"];
+            var partner = (PartnerEntity) context.HttpContext.Items["Partner"];
             
-            if(user == null)
+            if(user == null && partner == null)
                 context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
         }
 

@@ -3,8 +3,8 @@ using ColoredLive.Core.Models;
 
 namespace ColoredLive.Service.Core.Utils
 {
-    public interface IAuthorizationController
+    public interface IAuthorizationController<T>
     {
-        Identity Identity { get; set; }
+        T Identity { get; set; }
     }
 }

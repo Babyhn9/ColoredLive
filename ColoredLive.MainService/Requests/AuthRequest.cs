@@ -1,4 +1,4 @@
-namespace ColoredLive.Core.Requests
+namespace ColoredLive.MainService.Requests
 {
     public class AuthRequest
     {

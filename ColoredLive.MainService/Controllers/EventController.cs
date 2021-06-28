@@ -4,7 +4,7 @@ using System.Linq;
 using ColoredLive.BL.Interfaces;
 using ColoredLive.Core.Entities;
 using ColoredLive.Core.Models;
-using ColoredLive.Core.Requests;
+using ColoredLive.MainService.Requests;
 using ColoredLive.DAL;
 using ColoredLive.Service.Core;
 using ColoredLive.Service.Core.Attributes;

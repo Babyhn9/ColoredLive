@@ -11,6 +11,7 @@ namespace ColoredLive.DAL
     public class AppDbContext : DbContext
     {
         public DbSet<UserEntity> Users { get; set; }
+        public DbSet<PartnerEntity> Partners { get; set; }
         public DbSet<EventEntity> Events { get; set; }
         public DbSet<TagEntity> Tags { get; set; }
         public DbSet<RoleEntity> Roles { get; set; }

@@ -8,5 +8,6 @@ namespace ColoredLive.BL.Interfaces
     public interface ITokenCreationBl
     {
         string Generate(UserEntity user);
+        string Generate(PartnerEntity partnerEntity);
     }
 }

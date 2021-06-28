@@ -1,5 +1,5 @@
 using ColoredLive.BL.Interfaces;
-using ColoredLive.Core.Requests;
+using ColoredLive.MainService.Requests;
 using ColoredLive.Service.Core;
 using Microsoft.AspNetCore.Mvc;
 

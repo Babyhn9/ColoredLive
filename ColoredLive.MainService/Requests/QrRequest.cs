@@ -1,8 +1,8 @@
 using System;
 
-namespace ColoredLive.Core.Requests
+namespace ColoredLive.MainService.Requests
 {
-    public class EnterRequest
+    public class QrRequest
     {
         public Guid TicketId { get; set; }
     }

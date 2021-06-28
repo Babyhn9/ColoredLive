@@ -20,13 +20,24 @@ namespace ColoredLive.BL.Realizations
             _settings = settings.Value;
         }
 
-        public string Generate(UserEntity user)
+        public string Generate(UserEntity user) => GenerateToken(user.Id, false.ToString());
+       
+
+        public string Generate(PartnerEntity partnerEntity) => GenerateToken(partnerEntity.Id, true.ToString());
+            
+
+        private string GenerateToken(Guid id, string type)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_settings.SecretKey);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Subject = new ClaimsIdentity(new[]
+                    {
+                        new Claim("id", id.ToString()),
+                        new Claim("isPartner", type)
+                    }
+                ),
                 Expires = DateTime.UtcNow.AddHours(3),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

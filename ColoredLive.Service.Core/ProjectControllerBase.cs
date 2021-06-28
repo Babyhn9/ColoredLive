@@ -7,9 +7,8 @@ namespace ColoredLive.Service.Core
 {
     [Route("[controller]")]
     [LazyUserIdentity]
-    public class ProjectControllerBase : ControllerBase, IAuthorizationController
+    public class ProjectControllerBase : ControllerBase, IAuthorizationController<UserIdentity>
     {
-        public Identity Identity { get; set; }
-       
+        public UserIdentity Identity { get; set; }
     }
 }

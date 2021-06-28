@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ColoredLive.BL.Interfaces;
 using ColoredLive.Core.Entities;
-using ColoredLive.Core.Requests;
-using ColoredLive.Core.Responses;
+using ColoredLive.MainService.Requests;
 using ColoredLive.Service.Core;
 using Microsoft.AspNetCore.Mvc;
 

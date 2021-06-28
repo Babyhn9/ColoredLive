@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using ColoredLive.Core.Models;
 using ColoredLive.Service.Core.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace ColoredLive.Service.Core.Attributes
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            if (context.Controller is IAuthorizationController controller)
+            if (context.Controller is IAuthorizationController<UserIdentity> controller)
                 if (controller.Identity.Roles.All(el => el.Role != _reqRole))
                     context.Result = new JsonResult(new {Message = "У вас нет прав"})
                     {

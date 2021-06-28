@@ -18,18 +18,39 @@ namespace ColoredLive.Service.Core.Attributes
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            var controller = context.Controller as IAuthorizationController;
-            if(controller?.Identity != null) return;
-
-            if (context.HttpContext.Items.TryGetValue("User", out var user))
+            var userController = context.Controller as IAuthorizationController<UserIdentity>;
+            if (userController?.Identity != null)
             {
-                var convertedUser = (UserEntity) user;
-                controller.Identity = new Identity
+                if (context.HttpContext.Items.TryGetValue("User", out var user))
                 {
-                    User = (UserEntity) user,
-                    Roles = context.HttpContext.RequestServices.GetService<IUserBl>().GetUserRoles(convertedUser.Id)
-                };
+                    var convertedUser = (UserEntity) user;
+                    userController.Identity = new UserIdentity
+                    {
+                        User = (UserEntity) user,
+                        Roles = context.HttpContext.RequestServices.GetService<IUserBl>().GetRoles(convertedUser.Id)
+                    };
+                }
+                return;
             }
+            
+            var partnerController = context.Controller as IAuthorizationController<PartnerIdentity>;
+           
+            if (partnerController?.Identity !=null)
+            {
+                if (context.HttpContext.Items.TryGetValue("Partner", out var partner))
+                {
+                    var convertedUser = (PartnerEntity) partner;
+                    partnerController.Identity = new PartnerIdentity
+                    {
+                        User = (PartnerEntity) partner,
+                        Roles = context.HttpContext.RequestServices.GetService<IPartnerBl>().GetRoles(convertedUser.Id)
+                    };
+                }
+            }
+            
+          
+            
+            
                
         }
     }

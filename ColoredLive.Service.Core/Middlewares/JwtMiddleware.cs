@@ -22,18 +22,16 @@ namespace ColoredLive.Service.Core.Middlewares
             _settings = settings.Value;
         }
 
-        public async Task Invoke(HttpContext context, IUserBl userBl)
+        public async Task Invoke(HttpContext context, IUserBl userBl, IPartnerBl partnerBl)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             if (token != null)
-            {
-                AttachUserToContext(context, userBl, token);
-            }
+                AttachUserToContext(context, userBl, partnerBl, token);
 
             await _next(context);
         }
 
-        private void AttachUserToContext(HttpContext context, IUserBl userBl, string token)
+        private void AttachUserToContext(HttpContext context, IUserBl userBl, IPartnerBl partnerBl, string token)
         {
             try
             {
@@ -52,7 +50,12 @@ namespace ColoredLive.Service.Core.Middlewares
                 var jwt = (JwtSecurityToken)validatedToken;
                 var userId = Guid.Parse(jwt.Claims.First(x => x.Type == "id").Value);
                 
-                context.Items["User"] = userBl.GetUser(userId);
+                var isPartner = jwt.Claims.First(x => x.Type == "isPartner").Value.ToLower().Equals("true");
+                
+                if (!isPartner)
+                    context.Items["User"] = userBl.GetUser(userId);
+                else
+                    context.Items["Partner"] = partnerBl.GetPartner(userId);
             }
             catch
             {

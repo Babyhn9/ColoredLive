@@ -7,6 +7,7 @@ namespace ColoredLive.Core.Models
     {
         public const string EventOwner = "owner";
         public const string EventChecker = "checker";
+        
 
         public static List<string> All { get; } = new List<string>
         {

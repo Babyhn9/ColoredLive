@@ -1,16 +1,11 @@
-﻿using System;
-using System.Linq;
-using ColoredLive.BL.Interfaces;
+﻿using ColoredLive.BL.Interfaces;
 using ColoredLive.Core.Entities;
-using ColoredLive.Core.Requests;
-using ColoredLive.DAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ColoredLive.Core.Models;
-using ColoredLive.Core.Utils;
 using ColoredLive.Service.Core;
 using ColoredLive.Service.Core.Attributes;
-using Microsoft.EntityFrameworkCore;
+using ColoredLive.MainService.Requests;
 
 
 namespace ColoredLive.MainService.Controllers
@@ -43,7 +38,7 @@ namespace ColoredLive.MainService.Controllers
         
         [HttpGet("info")]
         [JwtAuth]
-        public ActionResult<Identity> GetInfo() => Identity;
+        public ActionResult<UserIdentity> GetInfo() => Identity;
         
         /// <summary>
         /// Регестрирует пользователя в системе, возвращает токен пользователя
@@ -53,6 +48,7 @@ namespace ColoredLive.MainService.Controllers
         [HttpPost("reg")]
         public ActionResult<string> RegisterUser(RegisterRequest request)
         {
+        
             var newUser = _userBl.Register(new UserEntity { Email = request.Email, Login = request.Login, Password = request.Password });
             
             if (newUser.IsEmpty)
